@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ประวัติคำสั่งซื้อ | Store 18A</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-sm">
+
+  <div class="max-w-2xl mx-auto mt-6 p-4 bg-white shadow rounded-lg">
+    <h1 class="text-xl font-bold mb-4 text-blue-600">📜 ประวัติคำสั่งซื้อ</h1>
+    <div id="history-container" class="space-y-4"></div>
+    <a href="index.html" class="mt-4 inline-block text-blue-500 hover:underline">← กลับไปหน้าหลัก</a>
+  </div>
+
+  <script>
+    const container = document.getElementById("history-container");
+    const saved = localStorage.getItem("orderHistory");
+
+    if (!saved) {
+      container.innerHTML = `<p class="text-gray-500">ยังไม่มีประวัติคำสั่งซื้อ</p>`;
+    } else {
+      const orders = JSON.parse(saved).reverse();
+
+      orders.forEach((order, index) => {
+        const div = document.createElement("div");
+        div.className = "p-3 border-b";
+
+        const items = order.items.map(item =>
+          `<li>${item.name} x${item.qty} = ${(item.price * item.qty).toFixed(2)}฿</li>`
+        ).join("");
+
+        div.innerHTML = `
+          <p class="text-xs text-gray-500">📅 ${order.date}</p>
+          <ul class="ml-4 list-disc">${items}</ul>
+          <p class="text-right font-semibold mt-1">รวม: ${order.total.toFixed(2)} บาท</p>
+        `;
+
+        container.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+</html>

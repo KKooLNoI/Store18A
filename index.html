@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store 18A</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex flex-col sm:flex-row           sm:justify-between sm:items-center gap-2">
+    <h1 class="text-xl font-bold text-blue-600">Store 18A</h1>
+    <div class="space-x-2 text-sm sm:text-base flex flex-wrap">
+      <button onclick="filterByCategory('ทั้งหมด')" class="category-btn text-gray-700 hover:text-blue-500">🛍️ ทั้งหมด</button>
+      <button onclick="filterByCategory('เครื่องดื่ม')" class="category-btn text-gray-700 hover:text-blue-500">🥤 เครื่องดื่ม</button>
+      <button onclick="filterByCategory('ของกิน')" class="category-btn text-gray-700 hover:text-blue-500">🍱 ของกิน</button>
+      <button onclick="filterByCategory('ของใช้')" class="category-btn text-gray-700 hover:text-blue-500">🧴 ของใช้</button>
+      <button onclick="filterByCategory('เครื่องปรุง')" class="category-btn text-gray-700 hover:text-blue-500">🧂 เครื่องปรุง</button>
+      <a href="history.html" class="category-btn text-gray-700 hover:text-blue-500">📜 ประวัติคำสั่งซื้อ</a>
+    </div>
+  </nav>
+
+  <!-- Search Bar -->
+  <div class="px-4 pt-3">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="ค้นหาสินค้า..." 
+      class="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+      oninput="searchProducts()"
+    />
+  </div>
+
+  <input type="file" id="csvUpload" accept="ของกิน.csv" class="m-4 p-2 border rounded" />
+
+
+
+  <!-- Product Grid -->
+  <div class="p-4">
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <!-- สินค้าจะแสดงตรงนี้ -->
+    </div>
+  </div>
+
+  <script>
+    // 🍹 เครื่องดื่ม
+    const drinks = [
+      {
+        name: "น้ำเปล่า 1.5L",
+        price: "15.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2023/03/13141000/012937851_P.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "น้ำเปล่า 600มล",
+        price: "10.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2023/03/13141000/012937851_P.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "นมโฟโมส",
+        price: "13.00",
+        image: "https://shop-image.readyplanet.com/Qd1yvGCRQLhCiYys1p0USaN9f9g=/ab26ff5261ae45e38db5e6104272c194",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "นมเปรี้ยวเมจิ",
+        price: "25.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30201132/072491248_P.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "บีทาเก้น 300 มล",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/87/88/8850393800587/8850393800587_1.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "บีทาเก้น 400 มล",
+        price: "25.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/87/88/8850393800587/8850393800587_1.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ไวตามิลขวด",
+        price: "17.00",
+        image: "https://gda.thai-tba.or.th/wp-content/uploads/2018/07/20_togo-original-e0b895e0b8a3e0b887-new-cap-m.png",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ไวตามิล แลตตาซอย กล่อง",
+        price: "12.00",
+        image: "https://www.vitamilkshop.com/wp-content/uploads/2022/10/VDB3T_2.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "โอวันติน ไมโล",
+        price: "12.00",
+        image: "https://down-th.img.susercontent.com/file/449775bbc7d6def7e9add75bacb55d5c",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "น้ำส้ม",
+        price: "12.00",
+        image: "https://www.ryoiireview.com/upload/article/202005/1590555819_c260303be9dbd819c0690fcf6e12ac26.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "น้ำตาลสด",
+        price: "15.00",
+        image: "https://www.cofethai.com/wp-content/uploads/2024/01/Artboard-1-copy-8-100-1.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "โยเกิร์ต",
+        price: "16.00",
+        image: "https://assets.tops.co.th/DUTCHIE-DutchieYoghurtPlain135gPack4-8851717021084-1?$JPEG$",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "โอเลี้ยง",
+        price: "12.00",
+        image: "https://down-th.img.susercontent.com/file/556e2b996fd6e476dabeeb235c341d52",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "น้ำอัดลมกระป๋อง",
+        price: "17.00",
+        image: "https://static.wixstatic.com/media/4066a7_26530b4bb6dd4c8eb4b89c98933f3dcb~mv2.jpg/v1/fill/w_600,h_600,al_c,lg_1,q_80,enc_avif,quality_auto/4066a7_26530b4bb6dd4c8eb4b89c98933f3dcb~mv2.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "นมเมจิ 200 มล",
+        price: "15.00",
+        image: "https://www.cpmeiji.com/attachment/product/8db888edb90610d91fa18365fa6f34189_PasteurizedMilk_FreshMilk_180ml_700x730.png",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "นมเมจิ 450 มล",
+        price: "30.00",
+        image: "https://www.cpmeiji.com/attachment/product/25bdbfad6c1c455b9ccc448655df81b39a_PasteurizedMilk_freshmilk_450ml_700x730.png",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "M150",
+        price: "12.00",
+        image: "https://cdn.imweb.me/thumbnail/20210413/7d37e706f0f79.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "คาราบาว",
+        price: "12.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/66/88/8855790000066/8855790000066_3-20240919120102-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "กระทิงแดง",
+        price: "12.00",
+        image: "https://halalthai.or.th/storages/products/p205624.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "สปอนเซอร์",
+        price: "12.00",
+        image: "https://static.wixstatic.com/media/4066a7_1b10969ee6104726a8009e8767bc202a~mv2.jpg/v1/fill/w_600,h_600,al_c,lg_1,q_80,enc_avif,quality_auto/4066a7_1b10969ee6104726a8009e8767bc202a~mv2.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ลิโพ",
+        price: "13.00",
+        image: "https://3auntiesthaimarket.com/cdn/shop/products/image_811194d7-2fa7-4104-becc-b5235ad5fd07_530x@2x.jpg?v=1649991413",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "SPY",
+        price: "35.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3gm-RRkRad980zUyA-SqeTsmplib1bfyqMQ&s",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เบียร์ลีโอ",
+        price: "60.00",
+        image: "https://newyorkpizza.online/live/wp-content/uploads/2020/06/Leo-Beer.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เบียร์ไฮนาเก้น",
+        price: "80.00",
+        image: "https://newyorkpizza.online/live/wp-content/uploads/2020/06/Heineken-Beer.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เบียร์ช้าง",
+        price: "60.00",
+        image: "https://newyorkpizza.online/live/wp-content/uploads/2020/06/Chang-Beer.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เบียร์สิงห์",
+        price: "65.00",
+        image: "https://mcgrocer.com/cdn/shop/files/b66726bb2c78d09515c79abe0e39e18b.jpg?v=1739413329",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "โออิชิ",
+        price: "15.00",
+        image: "https://www.oishigroup.com/upload_file/beverage/190523040227_Hi-res-Oishi-350-ml-HL-TH.png",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เพียวริคุ",
+        price: "12.00",
+        image: "https://assets.tops.co.th/PURIKU-PurikuwhiteTeaHoneyLemonFlavor350ml-8850228001561-1",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ชาอัมพวา",
+        price: "12.00",
+        image: "https://img.lazcdn.com/collect/social-img/7035c7111eea41c9ba0f069cf37d327b_2FD98FB64EA743BCB1EDC98B8586B030.jpg_720x720q80.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ลิปตัน 450 มล",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/76/88/8858998585076/8858998585076_2-20240306122011-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ลิปตัน 950 มล",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/76/88/8858998585076/8858998585076_2-20240306122011-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "แบรนด์ใหญ่",
+        price: "58.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/75/88/8852001106975/8852001106975_1-20240815100306-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "แบรนด์เล็ก",
+        price: "37.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/75/88/8852001106975/8852001106975_1-20240815100306-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "โค้ก 1.25 ลิตร",
+        price: "33.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/15/88/8851959144015/8851959144015_1-20221104151525-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เป๊ปซี่ 1.49 ลิตร",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/98/88/8858998581498/8858998581498_2-20240228103854-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เอส 1 ลิตร",
+        price: "25.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/98/88/8858998581498/8858998581498_2-20240228103854-.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "บีทาเก้น",
+        price: "10.00",
+        image: "https://halalthai.or.th/storages/products/499788.jpg",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "ยาคูล",
+        price: "9.00",
+        image: "https://www.yakultthailand.com/public/core/assets/images/company/yakult2514.png",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "นมไทยเดน มาร์ค 125 มล",
+        price: "10.00",
+        image: "https://shop-image.readyplanet.com/8RCi0xcSc7p63-qwEkkUbmS_6Sk=/fb1578d3395a4c6a83a2da34d99f2626",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "นมไทยเดน มาร์ค 200 มล",
+        price: "13.00",
+        image: "https://shop-image.readyplanet.com/8RCi0xcSc7p63-qwEkkUbmS_6Sk=/fb1578d3395a4c6a83a2da34d99f2626",
+        category: "เครื่องดื่ม"
+      },
+      
+      {
+        name: "โซดา",
+        price: "10.00",
+        image: "https://assets.tops.co.th/SINGHA-SinghaSoda325ccPack24-8850999220024-3?$JPEG$",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เยลลี่",
+        price: "12.00",
+        image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTsgtliOtFHayyGn_tlNN93yfH-PEOGRbdngEnDN96ztq48CUBc0s3OfQgDOXYsrEe_3QCCPQyGHAf97_pSom_kXO-5hswZlGuXgKVchme7W9etBCuseZmZj0cpv_4K52qLX2mc5Q&usqp=CAc",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "Ready",
+        price: "15.00",
+        image: "https://www.tcp.com/storage/content/product/energy-drink/ready/ready-1.png",
+        category: "เครื่องดื่ม"
+      },
+      {
+        name: "เบอรดี้",
+        price: "17.00",
+        image: "https://www.ajinomotofoodservicethailand.com/wp-content/uploads/2017/12/robusta-1.png",
+        category: "เครื่องดื่ม"
+      },
+    ];
+
+    // 🍞 ของกิน
+    const food = [
+      {
+        name: "มาม่าถ้วย",
+        price: "16.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30183548/004296230_P.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "โจ๊กถ้วย",
+        price: "20.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30185743/021246084_P.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "มาม่าซอง",
+        price: "8.00",
+        image: "https://www.sahapat.co.th/product/assets/uploads/img/product/image_th/20230411032520_90826C7B-0C9E-4DD6-B9F0-F102D765A788.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "โจ๊กซอง",
+        price: "15.00",
+        image: "https://assets.unileversolutions.com/v1/126324539.png",
+        category: "ของกิน"
+      },
+      {
+        name: "มาม่าOK",
+        price: "20.00",
+        image: "https://cdn.imweb.me/thumbnail/20201106/a217b9c75ed58.jpeg",
+        category: "ของกิน"
+      },
+      {
+        name: "ปลากระป๋องโรซ่า แบน",
+        price: "27.00",
+        image: "https://th-live-01.slatic.net/p/fdaf6871ba3b4cdc3fe569ef5d1bab47.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "ปลากระป๋องโรซ่า กลม",
+        price: "22.00",
+        image: "https://th-live-01.slatic.net/p/a43c83f2a39c559992d5364e14450335.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "ปลากระป๋องปุ้มปุ้ย",
+        price: "30.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/13/88/8850088003613/8850088003613-20240724092809-.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "ปลากระป๋องสามแม่ครัว",
+        price: "25.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/58/88/8850153333058/8850153333058.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "ปลากระป๋องอะยำ",
+        price: "40.00",
+        image: "https://media.allonline.7eleven.co.th/pdmain/561710-02-Canned-Fish-Ayum.jpg",
+        category: "ของกิน"
+      },
+      
+    ];
+
+    // 🧼 ของใช้
+    const utilities = [
+      {
+        name: "สบู่เบนเน็ท",
+        price: "45.00",
+        image: "https://via.placeholder.com/150",
+        category: "ของใช้"
+      },
+      {
+        name: "สบูู่อิงอร",
+        price: "35.00",
+        image: "https://via.placeholder.com/150",
+        category: "ของใช้"
+      },
+      {
+        name: "ปรับผ้านุ่ม ไฮยีน",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/88/8850092260330/8850092260330_1-20240411141327-.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "ปรับผ้านุ่ม Comfort",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/88/8850092260330/8850092260330_1-20240411141327-.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "สบู่สมุนไพร",
+        price: "40.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/36/88/8850784778136/8850784778136.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "สบู่ Asepso",
+        price: "25.00",
+        image: "https://s3.konvy.com/static/team/2021/0224/16141754445721.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "สบู่นกแก้ว 105 กรัม",
+        price: "17.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/92/88/8851929003892/8851929003892_1-20230929113756-.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "สบู่นกแก้้ว 70 กรัม",
+        price: "12.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/92/88/8851929003892/8851929003892_1-20230929113756-.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "สบู่เอเเซนเต้",
+        price: "30.00",
+        image: "https://asantee.com/wp-content/uploads/A/010.png",
+        category: "ของใช้"
+      },
+      {
+        name: "สบู่ลัก 70 กรัม",
+        price: "15.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/67/88/8851932183567/8851932183567_1_5.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "ยาสีฟันคอลเกต 35 กรัม",
+        price: "18.00",
+        image: "https://gourmetmarketthailand.com/_next/image?url=https%3A%2F%2Fmedia-stark.gourmetmarketthailand.com%2Fproducts%2Fcover%2F8850006232019-1.webp&w=1200&q=75",
+        category: "ของใช้"
+      },
+      {
+        name: "ยาสีฟันคอลเกต 100 กรัม",
+        price: "45.00",
+        image: "https://gourmetmarketthailand.com/_next/image?url=https%3A%2F%2Fmedia-stark.gourmetmarketthailand.com%2Fproducts%2Fcover%2F8850006232019-1.webp&w=1200&q=75",
+        category: "ของใช้"
+      },
+      {
+        name: "ยาสีฟันดาลี่ 80 กรัม",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/33/88/8851228000233/8851228000233_1-20230823081945-.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "ยาสีฟัน ดอกบัวคู่ 100 กรัม",
+        price: "40.00",
+        image: "https://www.dokbuaku.com/assets/uploads/img_products/main/1663039608_main.jpg",
+        category: "ของใช้"
+      },
+      {
+        name: "ยาสีฟัน ดอกบัวคู่ 150  กรัม",
+        price: "55.00",
+        image: "https://www.dokbuaku.com/assets/uploads/img_products/main/1663039608_main.jpg",
+        category: "ของใช้"
+      },
+    ];
+
+    const condiment = [
+      {
+        name: "น้ำปลาทิพย์รส 300 มล (เล็ก)",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/14/88/8850545311114/8850545311114_1-20240122152409-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำปลาทิพย์รส 700 มล (ใหญ่)",
+        price: "32.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/14/88/8850545311114/8850545311114_1-20240122152409-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำส้มสายชู อสร 250 มล (เล็ก)",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/08/88/8858935382508/8858935382508_1-20240122152524-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำส้มสายชู อสร 700 มล (ใหญ่)",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/08/88/8858935387008/8858935387008_1-20240122152734-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซีอิ้วภูเขาทอง <br> 200 มล",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/11/88/8851954101211/8851954101211_1-20230118181244-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซีอิ้วภูเขาทอง <br> 500 มล",
+        price: "20.00",
+        image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQhltbdoBPdNn12uReZ4c_xdtgeJXXWW8rHUeReiRjKbNQpnIj_tyEa3FwtdIXAPYtrnaNtRqZyBtf37WFP-Sjn6XLZVPkL7z_GfAdGz1kM6YjOCgLOAb-n6q-ZwBgNphWXB7kTv1g&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซีอิ้วภูเขาทอง <br> 600 มล",
+        price: "20.00",
+        image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQUeX7aaubV4D6wqQg8x0AZHaJAD8F55RbTTyijeOW-USx5AmhmDqutezYw3kiyYbM7Up95OL7miFZhZ-80phM0vLlY8iXxB6cZ1YiiXzfqrWOHpxsuhzYqm2bWUtfdlyTElfSqelE&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "พริกไทย ขวด",
+        price: "30.00",
+        image: "https://media.allonline.7eleven.co.th/pdzoom/362389_01_Supermarket.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ผักดองโรซ่า",
+        price: "22.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30184447/009038515_P.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ผักกาดนกพิราบ <br> 91 กรัม น้ำเงิน",
+        price: "25.00",
+        image: "https://www.taraad.com/photo/product/1608177521_fea0edec6e9f1f15788d.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ผักกาดนกพิราบ <br> 140 กรัม",
+        price: "22.00",
+        image: "https://down-th.img.susercontent.com/file/e139cb84e164ccda5eaa105d69c757fb",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ผักกาดนกพิราบ <br> 150 กรัม",
+        price: "35.00",
+        image: "https://down-th.img.susercontent.com/file/e139cb84e164ccda5eaa105d69c757fb",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แม็กกี้เล็ก",
+        price: "28.00",
+        image: "https://assets.tops.co.th/MAGGI-MaggiDippingSauce100ml-8850124065407-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แม็กกี้ใหญ่",
+        price: "38.00",
+        image: "https://assets.tops.co.th/MAGGI-MaggiDippingSauce100ml-8850124065407-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำจิ้มไก่",
+        price: "35.00",
+        image: "https://halalthai.or.th/storages/products/p281469.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เต้าเจ๊ยว<br>(กระปุก)",
+        price: "30.00",
+        image: "https://deksomboon.com/thumb.html?w=400&h=480&src=media_center/product/2021/1/25/451/product451202101256232.jpg&type=auto",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เต้าเจ๊ยว<br>(ขวด)",
+        price: "30.00",
+        image: "https://assets.tops.co.th/HEALTHYBOY-HealthyBoySoyBeanPasteFormula1350g-8850206160129-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เต้าหู้ยี้แดง",
+        price: "45.00",
+        image: "https://down-th.img.susercontent.com/file/1a082d6e048625942c1b4e725a63c1bb",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เต้าหู้ยี้ขาว",
+        price: "70.00",
+        image: "https://img.th.my-best.com/product_images/6888f147ff83fbe42084a6c7e019e64c.jpg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=a95a06276f69c80e0abdee680e5168c2",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "พริกเผาไทย (กลาง)",
+        price: "40.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30182810/000704296_P.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "พริกเผาไทย (เล็ก)",
+        price: "25.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30182810/000704296_P.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะปิตราขั่ง",
+        price: "28.00",
+        image: "https://assets.tops.co.th/TRACHUNG-TraChungPaste185g-8850180060057-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะปิตรากุ้ง",
+        price: "16.00",
+        image: "https://www.simummuangonline.com/files/product/thumb_405/cd6a83326e59f1a9c64b6dfcef248e3d.jpeg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำมันมรกต (เล็ก)",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/41/88/8850154000041/8850154000041_1-20230602202435-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำมันมรกต (ใหญ่)",
+        price: "65.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/41/88/8850154000041/8850154000041_1-20230602202435-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำมันงา",
+        price: "115.00",
+        image: "https://media-stark.gourmetmarketthailand.com/products/cover/8858826616385-1.webp",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสมะเขือเทศ โรซ่า <br> (กลาง)",
+        price: "30.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6hssKworSuunOoAovr0Std7KkTuIhFyYeA&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสมะเขือเทศ โรซ่า <br> (ใหญ่)",
+        price: "45.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6hssKworSuunOoAovr0Std7KkTuIhFyYeA&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสมะเขือเทศ ไฮนซ์ (กลาง)",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/66/88/8850343000166/8850343000166_1-20221222181027-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "พันท้ายนรสิงห์ น้ำจิ้มสุกี้ (กลาง)",
+        price: "60.00",
+        image: "https://sordaotieam.com/cdn/shop/files/330.jpg?v=1687141773",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำปลาร้า แม่บุญล้ำ",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/31/88/8858981500031/8858981500031_1-20230620135337-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำปลาร้า ตำมั่ว ",
+        price: "40.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/78/88/8858826900378/8858826900378_1-20231024111405-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำปลาร้า ตำนัว ",
+        price: "40.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/81/88/8858759600581/8858759600581_1-20230109152024-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำปลาร้า ไมค์ ",
+        price: "40.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/01/88/8858981500901/8858981500901_1-20240122153229-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสหวานหัวเสือ",
+        price: "20.00",
+        image: "https://down-th.img.susercontent.com/file/e668a28fbf62d728887b6c01f9fb108b",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสหวานง่วงเชียง",
+        price: "42.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/10/88/8851912030010/8851912030010-20241212150432-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสเต้าเจี๊ยว UFC",
+        price: "35.00",
+        image: "https://i0.wp.com/woworiental.com/wp-content/uploads/2022/06/Ufc_Salted_Soybean_340g.png?fit=1000%2C1000&ssl=1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสหอยนางรม 150 มล",
+        price: "25.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/11/88/8850038400011/8850038400011_1-20240125181837-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสหอยนางรม 300 มล",
+        price: "40.00",
+        image: "https://assets.tops.co.th/MAEKRUA-MaeKruaOysterSauce300cc-8850038400028-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซอสหอยนางรม 600 มล",
+        price: "55.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/35/88/8850038400035/8850038400035_1-20230112180428-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซีอิ้วขาวเห็ด",
+        price: "38.00",
+        image: "https://th-live-01.slatic.net/p/662578f464a09bf51f17dc447e301230.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซีอิ้วขาวเด็กสมบูรณ์ (เล็ก)",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/25/88/8850206011025/8850206011025_1-20250325140226-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ซีอิ้วขาวเด็กสมบูรณ์ (ใหญ่)",
+        price: "60.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/25/88/8850206011025/8850206011025_1-20250325140226-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำมันคิง",
+        price: "80.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/15/88/8850282111015/8850282111015_1-20240206164916-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำมันองุ่น",
+        price: "68.00",
+        image: "https://assets.tops.co.th/ANGOON-ANgoonSoyBeanOil1ltr-8850210000039-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "วุ้นเส้นสน 80 กรัม",
+        price: "20.00",
+        image: "https://tonsonfamily.com/wp-content/uploads/2017/10/%E0%B8%A7%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%AA%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%99-Featured-Image-2.png",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "วุ้นเส้นสน 40 กรัม",
+        price: "12.00",
+        image: "https://tonsonfamily.com/wp-content/uploads/2017/10/%E0%B8%A7%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%AA%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%99-Featured-Image-2.png",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "วุ้นเส้นมังกรคู่ 80 กรัม",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "วุ้นเส้นมังกรคู่ 40 กรัม",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เกร็ดขนมปัง",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป่งทอดกรอบโกกิ",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งทอดกรอบรสดี",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งทอดกรอบคนอร์",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ฟ้าไทย ซอสปรุง รสเห็ดหอม (ซอง)",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ฟ้าไทยน้ำก๋วยเตี๋ยว น้ำข้น",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ฟ้าไทยน้ำก๋วยเตี๋ยว ใส",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เกลือแถว",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เกลืือปรุงทิพย์ 500 กรัม",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เกลือปรุงทิพย์ ขวด",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งข้าวโพด",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะทิอัมพวาขวด 500 มล",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะทิอัมพวาขวด 250 มล",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะทิอัมพวาขวด 250 มล",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะทิอัมพวาขวด 250 มล",
+        price: "12.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        category: "เครื่องปรุง"
+      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ];
+    // รวมสินค้า
+    const productList = [...drinks, ...food, ...utilities, ...condiment];
+
+    const productGrid = document.getElementById("product-grid");
+    let currentCategory = "ทั้งหมด";
+
+    function displayProducts(products) {
+      productGrid.innerHTML = "";
+      if (products.length === 0) {
+        productGrid.innerHTML = `<p class="col-span-full text-center text-gray-500">ไม่พบสินค้าที่ค้นหา</p>`;
+        return;
+      }
+
+      products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-xl shadow-md p-4 flex flex-col items-center";
+        card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="w-24 h-24 object-cover rounded mb-2" />
+        <h2 class="text-md font-semibold text-center">${product.name}</h2>
+        <p class="text-blue-600 font-bold mt-1">${product.price} บาท</p>
+        <button class="mt-2 px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+          onclick="addToCart('${product.name}', ${parseFloat(product.price)})">เพิ่ม</button>
+    `;
+
+        productGrid.appendChild(card);
+      });
+    }
+
+    function filterByCategory(category) {
+      currentCategory = category;
+      searchProducts(); // ใช้งานร่วมกับช่องค้นหา
+    }
+
+    function searchProducts() {
+      const keyword = document.getElementById("searchInput").value.toLowerCase();
+
+      let filteredProducts = productList;
+
+      if (currentCategory !== "ทั้งหมด") {
+        filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
+      }
+
+      const searchResult = filteredProducts.filter(product =>
+        product.name.toLowerCase().includes(keyword)
+      );
+
+      displayProducts(searchResult);
+    }
+
+    // โหลดหน้าครั้งแรก
+    displayProducts(productList);
+
+    let cart = [];
+
+function addToCart(name, price) {
+  const item = cart.find(i => i.name === name);
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+  renderCart();
+}
+
+function changeQty(name, delta) {
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    cart = cart.filter(i => i.name !== name);
+  }
+  renderCart();
+}
+
+function removeItem(name) {
+  cart = cart.filter(i => i.name !== name);
+  renderCart();
+}
+
+function renderCart() {
+  const cartList = document.getElementById("cart-list");
+  const totalPriceElem = document.getElementById("total-price");
+  cartList.innerHTML = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    const itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    cartList.innerHTML += `
+      <li class="flex justify-between items-center">
+        <div class="flex-1">
+          <p class="font-medium">${item.name}</p>
+          <div class="flex items-center gap-2 mt-1">
+            <button class="px-2 py-0.5 bg-red-400 text-white rounded" onclick="changeQty('${item.name}', -1)">−</button>
+            <span>${item.qty}</span>
+            <button class="px-2 py-0.5 bg-green-500 text-white rounded" onclick="changeQty('${item.name}', 1)">+</button>
+            <button class="ml-auto px-2 py-0.5 bg-gray-300 text-xs rounded" onclick="removeItem('${item.name}')">ลบ</button>
+          </div>
+        </div>
+        <span class="font-semibold">${itemTotal.toFixed(2)}฿</span>
+      </li>
+    `;
+  });
+
+  totalPriceElem.textContent = total.toFixed(2);
+}
+
+function toggleHistory() {
+  const historyPanel = document.getElementById("order-history");
+  historyPanel.classList.toggle("hidden");
+  renderHistory();
+}
+
+function renderHistory() {
+  const historyList = document.getElementById("history-list");
+  historyList.innerHTML = "";
+
+  if (orderHistory.length === 0) {
+    historyList.innerHTML = `<p class="text-gray-500">ยังไม่มีประวัติการสั่งซื้อ</p>`;
+    return;
+  }
+
+  orderHistory.slice().reverse().forEach((order, index) => {
+    const div = document.createElement("div");
+    div.className = "border-b pb-2";
+
+    const items = order.items.map(item => 
+      `<li>${item.name} x${item.qty} = ${(item.price * item.qty).toFixed(2)}฿</li>`
+    ).join("");
+
+    div.innerHTML = `
+      <p class="text-xs text-gray-400">📅 ${order.date}</p>
+      <ul class="ml-4 list-disc">${items}</ul>
+      <p class="text-right font-semibold mt-1">รวม: ${order.total.toFixed(2)} บาท</p>
+    `;
+
+    historyList.appendChild(div);
+  });
+}
+let orderHistory = [];
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("ยังไม่มีสินค้าในตะกร้า");
+    return;
+  }
+
+  const order = {
+    items: [...cart],
+    total: parseFloat(document.getElementById("total-price").textContent),
+    date: new Date().toLocaleString("th-TH")
+  };
+
+  orderHistory.push(order);
+  localStorage.setItem("orderHistory", JSON.stringify(orderHistory));
+
+  alert("✅ ชำระเงินสำเร็จ!\n\n" + generateOrderSummary(order));
+  cart = [];
+  renderCart();
+}
+
+function generateOrderSummary(order) {
+  return order.items.map(item => `• ${item.name} x${item.qty} = ${(item.qty * item.price).toFixed(2)}฿`)
+    .join("\n") + `\n\nรวมทั้งหมด: ${order.total.toFixed(2)} บาท`;
+}
+
+window.addEventListener("load", () => {
+  const saved = localStorage.getItem("orderHistory");
+  if (saved) {
+    orderHistory = JSON.parse(saved);
+  }
+});
+</script>
+
+
+
+
+  </script>
+    <!-- Floating Cart -->
+    <div id="floating-cart" class="fixed bottom-4 right-4 bg-white shadow-lg rounded-xl w-72 max-h-[80vh] overflow-auto p-4 border border-gray-200">
+        <h2 class="text-lg font-bold mb-2">🛒 ตะกร้าสินค้า</h2>
+        <ul id="cart-list" class="space-y-2 text-sm"></ul>
+        <div class="mt-3 border-t pt-2 text-right font-semibold">
+        รวมทั้งหมด: <span id="total-price">0.00</span> บาท
+        <!-- ปุ่มชำระเงิน -->
+        <button onclick="checkout()" class="mt-3 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+    💰 ชำระเงิน
+  </button>
+  
+    </div>
+    <!-- ประวัติคำสั่งซื้อ -->
+    <div id="order-history" class="hidden fixed bottom-4 left-4 bg-white shadow-lg rounded-xl w-80 max-h-[80vh] overflow-auto p-4 border border-gray-200 z-50">
+    <h2 class="text-lg font-bold mb-2">📜 ประวัติคำสั่งซื้อ</h2>
+    <div id="history-list" class="space-y-4 text-sm"></div>
+    <button onclick="toggleHistory()" class="mt-3 w-full bg-gray-300 text-black py-1 rounded hover:bg-gray-400">
+      ❌ ปิด
+    </button>
+  </div>
+  
+  </div>
+  
+  
+</body>
+</html>
