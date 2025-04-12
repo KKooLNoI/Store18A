@@ -32,10 +32,6 @@
     />
   </div>
 
-  <input type="file" id="csvUpload" accept="ของกิน.csv" class="m-4 p-2 border rounded" />
-
-
-
   <!-- Product Grid -->
   <div class="p-4">
     <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -375,21 +371,129 @@
         image: "https://media.allonline.7eleven.co.th/pdmain/561710-02-Canned-Fish-Ayum.jpg",
         category: "ของกิน"
       },
-      
+      {
+        name: "ข้าวมาบุญครอง",
+        price: "170.00",
+        image: "data:image/jpeg;base64,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",
+        category: "ของกิน"
+      },
+      {
+        name: "ข้าวไดโนเสาร์",
+        price: "250.00",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHe0r1ieDFbHYADcCmN2kNIzD_bk194t3Xg&s",
+        category: "ของกิน"
+      },
+      {
+        name: "ข้าวหงษ์ทอง",
+        price: "220.00",
+        image: "https://ustatic.priceza.com/img/productgroup/340974-1-l.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "กาแฟซอง",
+        price: "6.00",
+        image: "https://down-th.img.susercontent.com/file/addd9acd4ac995218a9d32f74d238f95",
+        category: "ของกิน"
+      },
+      {
+        name: "นมสดคาเนชั่น 140 มล",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/92/88/8858705605592/8858705605592_5.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "นมสดคาเนชั่น 369 มล",
+        price: "30.00",
+        image: "https://www.makro.pro/_next/image?url=https%3A%2F%2Fimages.mango-prod.siammakro.cloud%2FSOURCE%2Fc6503e2b78e4420d82a892ce826ddefa&w=1080&q=75",
+        category: "ของกิน"
+      },
+      {
+        name: "นมสดคาเนชั่น 379 มล",
+        price: "32.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/05/88/8850124018205/8850124018205_5.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "นมสดตราหมี",
+        price: "16.00",
+        image: "https://assets.tops.co.th/BEARBRAND-BearBrandSterilizedMilk140mlPack6-8850124000033-2",
+        category: "ของกิน"
+      },
+      {
+        name: "นมข้น คาเนชั่น",
+        price: "40.00",
+        image: "https://image.makewebcdn.com/makeweb/m_1200x600/P1lhHuFlG/milk/%E0%B8%99%E0%B8%A1%E0%B8%82%E0%B9%89%E0%B8%99%E0%B8%AB%E0%B8%A7%E0%B8%B2%E0%B8%99_%E0%B8%95%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%99%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99_%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94388%E0%B8%81%E0%B8%A3%E0%B8%B1%E0%B8%A1.png",
+        category: "ของกิน"
+      },
+      {
+        name: "นมข้น มะลิ",
+        price: "30.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/16/88/8850151961116/8850151961116_1-20240930132552-.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "นมข้น มะลิ(แบบบีบ)",
+        price: "28.00",
+        image: "https://assets.tops.co.th/MALI-MaliSweetenedCondensedMilk170g-8850151951377-1?$JPEG$",
+        category: "ของกิน"
+      },
+      {
+        name: "นมข้น คาเนชั่ั่น(แบบบีบ)",
+        price: "25.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/98/88/8858705607398/8858705607398_4.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "เฮลบลูบอย แดง",
+        price: "70.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/93/88/8850423000093/8850423000093_3.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "เฮลบลูบอย เขียว",
+        price: "70.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/86/88/8850423000086/8850423000086_1.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "เนสกาแฟซองใหญ่",
+        price: "120.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/97/88/8850127004397/8850127004397_1-20231117193138-.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "มอคโคน่า ซองใหญ่",
+        price: "120.00",
+        image: "https://assets.tops.co.th/MOCCONA-MocconaTrioInstantCoffeeMixedExpresso158gPack40sachets-8851753098675-1",
+        category: "ของกิน"
+      },
+      {
+        name: "เบอร์ดี้ ซองใหญ่",
+        price: "120.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/25/88/8850250007425/8850250007425-20240517171035-.jpg",
+        category: "ของกิน"
+      },
+      {
+        name: "น้ำผึ้งขวดใหญ่",
+        price: "120.00",
+        image: "https://www.co-opclick.com/content/images/thumbs/0000892_-100-_600.jpeg",
+        category: "ของกิน"
+      },
+
     ];
 
     // 🧼 ของใช้
     const utilities = [
       {
-        name: "สบู่เบนเน็ท",
+        name: "สบู่เบนเนท",
         price: "45.00",
-        image: "https://via.placeholder.com/150",
+        image: "https://s3.konvy.com/static/team/2021/0705/16254679359416.jpg",
         category: "ของใช้"
       },
       {
-        name: "สบูู่อิงอร",
+        name: "สบู่อิงอร",
         price: "35.00",
-        image: "https://via.placeholder.com/150",
+        image: "https://thmappbkk.blob.core.windows.net/boots/2021/7/13/00f0697f-d494-440e-8819-2d9d9c1cafd8_large.png",
         category: "ของใช้"
       },
       {
@@ -769,109 +873,214 @@
       },
       {
         name: "เกร็ดขนมปัง",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/02/88/8850123170102/8850123170102_1-20240123140022-.jpg",
         category: "เครื่องปรุง"
       },
       {
-        name: "แป่งทอดกรอบโกกิ",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        name: "แป้งทอดกรอบโกกิ",
+        price: "18.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/28/88/8850180040028/8850180040028_1-20240124151950-.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "แป้งทอดกรอบรสดี",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "18.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/28/88/8850250002628/8850250002628_5.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "แป้งทอดกรอบคนอร์",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "20.00",
+        image: "https://assets.tops.co.th/KNORR-KnorrCrispyFlour120g-8850144200550-1",
         category: "เครื่องปรุง"
       },
       {
         name: "ฟ้าไทย ซอสปรุง รสเห็ดหอม (ซอง)",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "13.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/57/88/8854334002757/8854334002757_1-20230118175824-.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "ฟ้าไทยน้ำก๋วยเตี๋ยว น้ำข้น",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/49/88/8854334003549/8854334003549_2-20240701143046-.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "ฟ้าไทยน้ำก๋วยเตี๋ยว ใส",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "35.00",
+        image: "https://media.allonline.7eleven.co.th/pdmain/390660-00-Seasoning-Mixes-Fahthai.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "เกลือแถว",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "15.00",
+        image: "https://down-th.img.susercontent.com/file/sg-11134201-22100-a89r2ae760hv9e",
         category: "เครื่องปรุง"
       },
       {
-        name: "เกลืือปรุงทิพย์ 500 กรัม",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        name: "เกลือปรุงทิพย์ 500 กรัม",
+        price: "15.00",
+        image: "https://cdn8.devgodigit.net/wp-content/uploads/2021/09/30183233/000753599_P.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "เกลือปรุงทิพย์ ขวด",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "15.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/26/88/8850069011026/8850069011026_1-20240221151514-.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "แป้งข้าวโพด",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "35.00",
+        image: "https://assets.tops.co.th/KNORR-KnorrCornFlour200g-8850144074014-1",
         category: "เครื่องปรุง"
       },
       {
         name: "กะทิอัมพวาขวด 500 มล",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "50.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/36/88/8850161166136/8850161166136_1_1.jpg",
         category: "เครื่องปรุง"
       },
       {
         name: "กะทิอัมพวาขวด 250 มล",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        price: "30.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/36/88/8850161166136/8850161166136_1_1.jpg",
         category: "เครื่องปรุง"
       },
       {
-        name: "กะทิอัมพวาขวด 250 มล",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        name: "กะทิชาวเกาะ 150 มล",
+        price: "20.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/19/88/8850367100019/8850367100019_1-20221222181444-.jpg",
         category: "เครื่องปรุง"
       },
       {
-        name: "กะทิอัมพวาขวด 250 มล",
-        price: "12.00",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKY2DPqv2HippS3U0UYEPxg_pXcGRcChS4bg&s",
+        name: "กะทิชาวเกาะ 250 มล",
+        price: "30.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/19/88/8850367100019/8850367100019_1-20221222181444-.jpg",
         category: "เครื่องปรุง"
       },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      {
+        name: "กะทิชาวเกาะ 1 ลิตร",
+        price: "85.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/19/88/8850367100019/8850367100019_1-20221222181444-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะทิอร่อยดี 250 มล",
+        price: "30.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/78/88/8851613101378/8851613101378_1-20240216155943-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กะทิอร่อยดี 1 ลิตร",
+        price: "85.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/78/88/8851613101378/8851613101378_1-20240216155943-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "กระเทียมดอง",
+        price: "12.00",
+        image: "https://www.simummuangmarket.com/uploads/image-1549548828717.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "มะนาวดองเค็ม",
+        price: "12.00",
+        image: "https://images.mango-prod.siammakro.cloud/SOURCE/7632ca7474d847b19d95fe289e26eefc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำตาลทรายมิตรผล 1 กก",
+        price: "30.00",
+        image: "https://assets.tops.co.th/MITRPHOL-MitrpholRefinedWhiteSugar1kg-8850256100106-1",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำตาลทรายแดง วังขนาย 1 กก",
+        price: "35.00",
+        image: "https://putterfreshshop.com/wp-content/uploads/2024/03/%E0%B8%A7%E0%B8%B1%E0%B8%87%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%A2-%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%95%E0%B8%B2%E0%B8%A5%E0%B8%97%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B9%81%E0%B8%94%E0%B8%87-1KG.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งสารี ตราว่าว",
+        price: "40.00",
+        image: "https://allforbaking.com/wp-content/uploads/2022/05/01010021.png",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำตาลปี๊บ",
+        price: "25.00",
+        image: "https://somsaha.com/wp-content/uploads/2021/05/%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%95%E0%B8%B2%E0%B8%A5_%E0%B8%9C%E0%B8%B6%E0%B9%89%E0%B8%87_%E0%B8%9B%E0%B8%B5%E0%B9%8A%E0%B8%9A_1000_%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2_01.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เม็ดสาคูเม็ดใหญ่",
+        price: "28.00",
+        image: "https://down-th.img.susercontent.com/file/5c4bfa29d53b3c760c082de8abd94634",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "เม็ดสาคูเม็ดเล็ก",
+        price: "28.00",
+        image: "https://image.makewebcdn.com/makeweb/m_1920x0/LnLGuwlBA/DefaultData/8.png",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ถั่วเขียว",
+        price: "35.00",
+        image: "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/50/88/8851683000250/8851683000250_1-20241127154451-.jpg",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ถั่วลิสง",
+        price: "50.00",
+        image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSfYHpjzvt_3OLBYb5U2_pRdECTIqRmi7g4h5pgDS7tUM-1dA8AY7RPaRusclifuHlCEHMJoWiOh6A9cYfjiYuDY0pqhgx7Zi-KoYyjMetVAv4AjU4FUzJLX-FNuDlD&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ถั่วลิสงทอด",
+        price: "55.00",
+        image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRyY5zorA-NwTseay-6o9fVFdSdah4AdJHIt4SayCyukcHKzleN5aDJ06jVhkvKYI3H__YLdQVjiqwQ-ySYvqlcvhiwIyFAd9QqbvdMCRcTJpffDNdwzyyrRWMMl75O&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งข้าวจ้าว ตราช้างสามเศียร",
+        price: "30.00",
+        image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQlDb3INdT7QSc0TVKNdMKb66J8rVUN6Y9GhNQVjlpCBWUMzw0oxEVXhJvDX8MrFbAiAx9clos0mfIAHzeY4P9LK3fXQBia7J_U325s7_IMrTuLl2O6gnU78LZw-eZCE1wHtfzDtQ&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งข้าวเหนียว ตราช้างสามเศียร",
+        price: "28.00",
+        image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRKTbsuW1fkz8vf9mo20PHvW-sahMC2YKsPNxhMG9D9YntO7CblkXn_ZcfF9i2LgncQf5S0yBFYqpexuNjojQf5nUbszNow80qKp-DfX_sjLiCCTk8oHvq9&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งท้าวอย่างดี",
+        price: "28.00",
+        image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTeCPpBQOSrwPCImdMNFRnDYVFDx1NiSlqBlaz0I3FuGA8HbFLeS5Rg8Bt2uboAlXMRg9pprfY1aqo4O_0qquOnnPgR1O9qZb3GLFoa_-MdWBAkrNo33Eb2l5bENI98fgDqzTKfyFF5f91z&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "แป้งมันสำปะหลัง",
+        price: "28.00",
+        image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAgQoG0quJmifeCJWNZJM0ZcCfJc6Zn63braA3UzEW6bMV07WDaJTS9-BApzu7kSrDlCN5z9tBjuBio82M27K_uZATpb7or4B01mfHlwo6xn-1zEQfmK25zL9UIli8cE5t71AsFjk_6A&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "น้ำตาลทรายแดงไร่ทิพย์",
+        price: "25.00",
+        image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRfxf7EFSpSCn_4LXWh9zOvzeLqKPzXQLwkewktBhWzyp6a6tAgF0tqnqlYATM9IsVpRvN-wAUnQjJc2cXTpQzXhHQIffNX_zo4QN-sqL6xLGgpJX6tNJ4ZSBXT1ivXQnncziDc_NU&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
+      {
+        name: "ถั่วเหลืองน้ำเต้าหู้",
+        price: "55.00",
+        image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQtNzfyHYZz4PfRWwaZNc8RhxgAdfAgNn8Pbnamhzo_O9nCBTLT-jnjlzSjt4ICyvmwQjXN4QA0w_EoRMF8M8tb13MWQGvPlirUrHzlGeZO1OqkUjNtPyIPSijvIEYuUofQRlUy0h4&usqp=CAc",
+        category: "เครื่องปรุง"
+      },
 
     ];
     // รวมสินค้า
