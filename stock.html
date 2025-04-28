@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>จัดการสต็อกสินค้า - Store 18A</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-600">จัดการสต็อกสินค้า</h1>
+    <a href="index.html" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">กลับไปหน้าร้าน</a>
+  </nav>
+
+  <div class="container mx-auto p-4">
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-lg font-semibold mb-4">📦 เพิ่มสินค้าใหม่</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <div id="barcode-scanner" class="mb-4 border-2 border-dashed border-gray-300 p-4 rounded-lg">
+            <p class="text-center text-gray-500">พื้นที่สแกนบาร์โค้ด</p>
+          </div>
+          <button onclick="startBarcodeScan()" class="w-full px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+            📷 เริ่มสแกนบาร์โค้ด
+          </button>
+        </div>
+        
+        <div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">เลขบาร์โค้ด</label>
+            <input type="text" id="barcode" class="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" readonly>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">ชื่อสินค้า</label>
+            <input type="text" id="product-name" class="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">ราคา</label>
+            <input type="number" id="product-price" class="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">หมวดหมู่</label>
+            <select id="product-category" class="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <option value="เครื่องดื่ม">เครื่องดื่ม</option>
+              <option value="ของกิน">ของกิน</option>
+              <option value="ของใช้">ของใช้</option>
+              <option value="เครื่องปรุง">เครื่องปรุง</option>
+            </select>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">URL รูปภาพ</label>
+            <input type="text" id="product-image" class="w-full p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="https://...">
+          </div>
+          
+          <button onclick="addProduct()" class="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+            ➕ เพิ่มสินค้า
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-lg font-semibold mb-4">📋 รายการสินค้าในสต็อก</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">บาร์โค้ด</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อสินค้า</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ราคา</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">หมวดหมู่</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">รูปภาพ</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">การจัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="product-table-body" class="bg-white divide-y divide-gray-200">
+            <!-- สินค้าจะแสดงที่นี่ -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    let barcodeScanner = null;
+
+    function startBarcodeScan() {
+      const scannerDiv = document.getElementById('barcode-scanner');
+      scannerDiv.innerHTML = '';
+      
+      barcodeScanner = new Html5Qrcode("barcode-scanner");
+      
+      barcodeScanner.start(
+        { facingMode: "environment" },
+        {
+          fps: 10,
+          qrbox: { width: 250, height: 250 }
+        },
+        qrCodeMessage => {
+          document.getElementById('barcode').value = qrCodeMessage;
+          stopBarcodeScan();
+          
+          // ตรวจสอบว่ามีสินค้านี้อยู่แล้วหรือไม่
+          const existingProduct = products.find(p => p.barcode === qrCodeMessage);
+          if (existingProduct) {
+            document.getElementById('product-name').value = existingProduct.name;
+            document.getElementById('product-price').value = existingProduct.price;
+            document.getElementById('product-category').value = existingProduct.category;
+            document.getElementById('product-image').value = existingProduct.image || '';
+          }
+        },
+        errorMessage => {
+          console.log("เกิดข้อผิดพลาด:", errorMessage);
+        }
+      );
+    }
+
+    function stopBarcodeScan() {
+      if (barcodeScanner) {
+        barcodeScanner.stop().then(() => {
+          document.getElementById('barcode-scanner').innerHTML = '<p class="text-center text-gray-500">พื้นที่สแกนบาร์โค้ด</p>';
+          barcodeScanner = null;
+        });
+      }
+    }
+
+    function addProduct() {
+      const barcode = document.getElementById('barcode').value;
+      const name = document.getElementById('product-name').value;
+      const price = parseFloat(document.getElementById('product-price').value);
+      const category = document.getElementById('product-category').value;
+      const image = document.getElementById('product-image').value;
+      
+      if (!barcode || !name || isNaN(price)) {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+        return;
+      }
+      
+      // ตรวจสอบว่ามีบาร์โค้ดนี้อยู่แล้วหรือไม่
+      const existingIndex = products.findIndex(p => p.barcode === barcode);
+      
+      if (existingIndex >= 0) {
+        // อัพเดทสินค้าที่มีอยู่
+        products[existingIndex] = { barcode, name, price, category, image };
+      } else {
+        // เพิ่มสินค้าใหม่
+        products.push({ barcode, name, price, category, image });
+      }
+      
+      // บันทึกลง localStorage
+      localStorage.setItem('products', JSON.stringify(products));
+      
+      // รีเฟรชตาราง
+      renderProductTable();
+      
+      // เคลียร์ฟอร์ม
+      document.getElementById('barcode').value = '';
+      document.getElementById('product-name').value = '';
+      document.getElementById('product-price').value = '';
+      document.getElementById('product-image').value = '';
+      
+      alert('บันทึกสินค้าเรียบร้อยแล้ว');
+    }
+
+    function deleteProduct(barcode) {
+      if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบสินค้านี้?')) {
+        products = products.filter(p => p.barcode !== barcode);
+        localStorage.setItem('products', JSON.stringify(products));
+        renderProductTable();
+      }
+    }
+
+    function renderProductTable() {
+      const tableBody = document.getElementById('product-table-body');
+      tableBody.innerHTML = '';
+      
+      if (products.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">ไม่มีสินค้าในสต็อก</td>
+          </tr>
+        `;
+        return;
+      }
+      
+      products.forEach(product => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${product.barcode}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${product.name}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${product.price.toFixed(2)}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${product.category}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            ${product.image ? `<img src="${product.image}" alt="${product.name}" class="w-10 h-10 object-cover rounded">` : 'ไม่มีรูป'}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <button onclick="editProduct('${product.barcode}')" class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">แก้ไข</button>
+            <button onclick="deleteProduct('${product.barcode}')" class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600">ลบ</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function editProduct(barcode) {
+      const product = products.find(p => p.barcode === barcode);
+      if (!product) return;
+      
+      document.getElementById('barcode').value = product.barcode;
+      document.getElementById('product-name').value = product.name;
+      document.getElementById('product-price').value = product.price;
+      document.getElementById('product-category').value = product.category;
+      document.getElementById('product-image').value = product.image || '';
+      
+      // เลื่อนไปยังฟอร์มแก้ไข
+      document.getElementById('product-name').focus();
+    }
+
+    // โหลดข้อมูลครั้งแรก
+    renderProductTable();
+  </script>
+</body>
+</html>
