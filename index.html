@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ร้านค้าซอย 18A & สวนยายศรี | สดทุกวัน ราคาถูก</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🏪</div>
+    <span>ร้านค้าซอย 18A</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#home" class="active">หน้าแรก</a></li>
+      <li><a href="#store">ร้านค้าซอย 18A</a></li>
+      <li><a href="#veggie">สวนยายศรี</a></li>
+      <li><a href="#contact" class="nav-cta">📱 ติดต่อเรา</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="เมนู">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════ SIDE DRAWER ══════════ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<aside class="side-drawer" id="sideDrawer">
+  <div class="drawer-header">
+    <div class="drawer-logo">
+      <div class="drawer-logo-icon">🏪</div>
+      <span>ร้านค้าซอย 18A</span>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <nav class="drawer-nav">
+    <a href="#home" onclick="closeDrawer()">หน้าแรก</a>
+    <a href="#store" onclick="closeDrawer()">ร้านค้าซอย 18A</a>
+    <a href="#veggie" onclick="closeDrawer()">สวนยายศรี</a>
+    <a href="#contact" class="drawer-cta" onclick="closeDrawer()">📱 ติดต่อเรา</a>
+  </nav>
+</aside>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span><span>เปิดทุกวัน 05:00 – 19:00 น.</span>
+      </div>
+      <h1 class="hero-title">
+        ร้านค้าซอย 18A & สวนยายศรี<br>
+        <span class="accent">สดทุกวัน</span> ใกล้บ้านคุณ
+      </h1>
+      <p class="hero-sub">
+        ร้านค้าซอย 18Aบ้านเรา มีสินค้าอุปโภคบริโภคครบครัน<br>
+        พร้อมผักสดปลูกเองจากสวนหลังบ้าน ไม่ผ่านสารเคมี
+      </p>
+      <div class="hero-btns">
+        <a href="#store" class="btn-primary">🛒 ดูสินค้าของชำ</a>
+        <a href="#veggie" class="btn-outline">🥬 สวนยายศรี</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">รายการสินค้า</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10 ปี</div>
+          <div class="stat-label">ให้บริการชุมชน</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">ผักอินทรีย์</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-main-card">
+        <div class="card-header">
+          <div class="card-avatar">🏪</div>
+          <div class="card-header-text">
+            <h3>ร้านค้าซอย 18A วันนี้</h3>
+            <p>อัปเดตสด ราคาดีที่สุด</p>
+          </div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-item"><div class="emoji">🍚</div><div class="label">ข้าวสาร</div></div>
+          <div class="mini-item"><div class="emoji">🥚</div><div class="label">ไข่ไก่</div></div>
+          <div class="mini-item"><div class="emoji">🍜</div><div class="label">มาม่า</div></div>
+          <div class="mini-item"><div class="emoji">🥬</div><div class="label">ผักบุ้ง</div></div>
+          <div class="mini-item"><div class="emoji">🌿</div><div class="label">กะเพรา</div></div>
+          <div class="mini-item"><div class="emoji">🌶️</div><div class="label">พริก</div></div>
+        </div>
+      </div>
+      <div class="float-badge b1">
+        <span class="dot2 green"></span> ผักสดทุกเช้า
+      </div>
+      <div class="float-badge b2">
+        <span class="dot2 amber"></span> ส่งฟรีในหมู่บ้าน
+      </div>
+      <div class="float-badge b3">
+        <span class="dot2 lime"></span> ปลูกเองที่บ้าน
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FEATURES STRIP ══════════ -->
+<div class="features-strip">
+  <div class="features-strip-inner">
+    <div class="feat-item">
+      <div class="feat-icon">🚚</div>
+      <div><div class="feat-title">ส่งถึงบ้าน</div><div class="feat-sub">ในหมู่บ้าน ฟรี!</div></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">🌿</div>
+      <div><div class="feat-title">ผักปลอดสาร</div><div class="feat-sub">ปลูกเองที่บ้าน 100%</div></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">💳</div>
+      <div><div class="feat-title">ชำระง่าย</div><div class="feat-sub">พร้อมเพย์ / QR / เงินสด</div></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">📱</div>
+      <div><div class="feat-title">สั่งทางไลน์</div><div class="feat-sub">ตอบไวทุกวัน</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ STORE SECTION ══════════ -->
+<section class="store-section" id="store">
+  <div class="section-inner">
+    <div class="store-header">
+      <div>
+        <div class="section-label reveal">ร้านค้าซอย 18A</div>
+        <h2 class="section-title reveal reveal-d1">สินค้าครบ ราคาเป็นมิตร</h2>
+        <p class="section-sub reveal reveal-d2">เลือกซื้อสินค้าอุปโภคบริโภคคุณภาพดี ราคาถูก จัดส่งถึงบ้านในหมู่บ้าน</p>
+      </div>
+    </div>
+
+    <div class="category-tabs reveal">
+      <button class="cat-tab active" onclick="filterCat(this,'all')">ทั้งหมด</button>
+      <button class="cat-tab" onclick="filterCat(this,'staple')">🍚 ข้าว-แป้ง</button>
+      <button class="cat-tab" onclick="filterCat(this,'instant')">🍜 บะหมี่สำเร็จรูป</button>
+      <button class="cat-tab" onclick="filterCat(this,'drink')">🧃 เครื่องดื่ม</button>
+      <button class="cat-tab" onclick="filterCat(this,'seasoning')">🧂 เครื่องปรุง</button>
+      <button class="cat-tab" onclick="filterCat(this,'household')">🧴 ของใช้</button>
+      <button class="cat-tab" onclick="filterCat(this,'snack')">🍭 ขนม</button>
+    </div>
+
+    <div class="products-grid" id="prodGrid">
+      <!-- สินค้าถูก render จาก STORE_PRODUCTS array ใน main.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ VEGGIE SECTION ══════════ -->
+<section class="veggie-section" id="veggie">
+  <div class="section-inner">
+    <div class="veggie-header">
+      <div>
+        <div class="section-label reveal">สวนยายศรี</div>
+        <h2 class="section-title reveal reveal-d1">ผักสด ปลูกเอง<br>จากสวนหลังบ้าน</h2>
+        <p class="section-sub reveal reveal-d2">
+          เก็บเช้า ขายเช้า ปลูกด้วยระบบอินทรีย์ ไม่ใช้ยาฆ่าแมลง<br>
+          สั่งล่วงหน้าได้ทุกวัน รับสดทุกเช้า
+        </p>
+        <div style="margin-top:1.5rem;" class="reveal reveal-d3">
+          <a href="#contact" class="btn-primary">📱 สั่งผักล่วงหน้า</a>
+        </div>
+      </div>
+      <div class="veggie-header-visual reveal reveal-d2">
+        <div class="fresh-banner">
+          <h3>🌿 ผักสดประจำวัน</h3>
+          <p>เก็บจากสวน เช้าวันนี้</p>
+          <div class="fresh-badges">
+            <span class="fresh-badge">✅ ไม่ใช้สาร</span>
+            <span class="fresh-badge">🌱 อินทรีย์</span>
+            <span class="fresh-badge">💧 ปลูกเอง</span>
+          </div>
+        </div>
+        <ul class="today-list">
+          <li><span class="v-name"><span class="v-dot"></span>ผักบุ้ง</span><span class="v-price">฿10/กำ</span></li>
+          <li><span class="v-name"><span class="v-dot"></span>กะเพรา</span><span class="v-price">฿10/กำ</span></li>
+          <li><span class="v-name"><span class="v-dot"></span>โหระพา</span><span class="v-price">฿10/กำ</span></li>
+          <li><span class="v-name"><span class="v-dot"></span>คะน้า</span><span class="v-price">฿15/กำ</span></li>
+          <li><span class="v-name"><span class="v-dot"></span>พริกขี้หนู</span><span class="v-price">฿5/กำ</span></li>
+          <li><span class="v-name"><span class="v-dot"></span>ตะไคร้</span><span class="v-price">฿5/3ต้น</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Veggie cards -->
+    <div class="veg-cards">
+      <div class="veg-card reveal">
+        <div class="veg-thumb home-grown">🥬<span class="home-tag">🏡 ปลูกเอง</span></div>
+        <div class="veg-info">
+          <div class="veg-name">ผักบุ้ง</div>
+          <div class="veg-desc">เด็ดสดทุกเช้า นุ่มกรอบ ต้มผัดทุกเมนู</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿10 / กำ</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal reveal-d1">
+        <div class="veg-thumb home-grown">🌿<span class="home-tag">🏡 ปลูกเอง</span></div>
+        <div class="veg-info">
+          <div class="veg-name">กะเพรา</div>
+          <div class="veg-desc">ใบสด กลิ่นหอม ผัดกะเพราอร่อยทุกครั้ง</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿10 / กำ</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal reveal-d2">
+        <div class="veg-thumb home-grown">🌱<span class="home-tag">🏡 ปลูกเอง</span></div>
+        <div class="veg-info">
+          <div class="veg-name">โหระพา</div>
+          <div class="veg-desc">สมุนไพรไทยแท้ ปลูกเอง ไม่ผ่านสาร</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿10 / กำ</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal reveal-d3">
+        <div class="veg-thumb home-grown">🥦<span class="home-tag">🏡 ปลูกเอง</span></div>
+        <div class="veg-info">
+          <div class="veg-name">คะน้า</div>
+          <div class="veg-desc">อินทรีย์ 100% ใบกรอบ หวานธรรมชาติ</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿15 / กำ</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal">
+        <div class="veg-thumb home-grown">🌶️<span class="home-tag">🏡 ปลูกเอง</span></div>
+        <div class="veg-info">
+          <div class="veg-name">พริกขี้หนู</div>
+          <div class="veg-desc">เผ็ดจัด สีสวย เก็บสดทุกวัน</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿5 / กำ</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal reveal-d1">
+        <div class="veg-thumb market">🍅</div>
+        <div class="veg-info">
+          <div class="veg-name">มะเขือเทศ</div>
+          <div class="veg-desc">สีแดงสด รสหวานอมเปรี้ยว คัดเกรด A</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿20 / กก.</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal reveal-d2">
+        <div class="veg-thumb home-grown">🌿<span class="home-tag">🏡 ปลูกเอง</span></div>
+        <div class="veg-info">
+          <div class="veg-name">ตะไคร้</div>
+          <div class="veg-desc">กลิ่นหอม ต้มยำ แกงเผ็ด ทุกเมนู</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿5 / 3 ต้น</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+      <div class="veg-card reveal reveal-d3">
+        <div class="veg-thumb market">🌽</div>
+        <div class="veg-info">
+          <div class="veg-name">ข้าวโพดหวาน</div>
+          <div class="veg-desc">หวาน กรอบ ต้มทาน หรือย่างไฟ</div>
+          <div class="veg-bottom">
+            <span class="veg-price">฿15 / ฝัก</span>
+            <span class="veg-stock">✅ มีของ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Section — ถูก render จาก VEGGIE_VIDEOS array ใน main.js -->
+    <div id="veggieVideos" style="margin-bottom:3rem;"></div>
+
+    <!-- Grow Guide -->
+    <div class="grow-guide reveal">
+      <h2>🌱 วิธีปลูกผักที่บ้าน — เคล็ดลับจากสวนเรา</h2>
+      <p>ปลูกง่าย ใช้พื้นที่น้อย ผักสดไว้กินเองทุกวัน</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">🪴</div>
+          <div class="step-title">เตรียมดิน</div>
+          <div class="step-text">ผสมดินร่วนกับปุ๋ยหมักอัตรา 1:1 ใส่ในกระถางหรือแปลง</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">🌱</div>
+          <div class="step-title">หว่านเมล็ด</div>
+          <div class="step-text">โรยเมล็ดห่างกัน 5–10 ซม. กลบดินบาง ๆ</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">💧</div>
+          <div class="step-title">รดน้ำสม่ำเสมอ</div>
+          <div class="step-text">รดเช้า–เย็น ให้ชุ่ม แต่อย่าให้น้ำขัง</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">☀️</div>
+          <div class="step-title">แสงแดดเพียงพอ</div>
+          <div class="step-text">ต้องการแสง 4–6 ชม./วัน วางหน้าต่างหรือกลางแจ้ง</div>
+        </div>
+        <div class="step">
+          <div class="step-icon">🌿</div>
+          <div class="step-title">เก็บเกี่ยว</div>
+          <div class="step-text">ผักบุ้ง 14 วัน • คะน้า 30 วัน • กะเพรา 45 วัน</div>
+        </div>
+      </div>
+      <div class="tip-callout">
+        💡 <strong>เคล็ดลับเด็ด:</strong> ใช้น้ำหมักชีวภาพจากเปลือกผลไม้แทนปุ๋ยเคมี ผักหวาน นุ่ม และปลอดภัยสำหรับทุกคนในบ้าน ช่วยประหยัดค่าใช้จ่ายได้มากกว่า 80%!
+      </div>
+    </div>
+
+    <!-- Photo Mosaic — render จาก GARDEN_PHOTOS array ใน main.js -->
+    <div id="gardenMosaic"></div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section class="testimonials-section">
+  <div class="section-inner">
+    <div class="section-label">รีวิวลูกค้า</div>
+    <h2 class="section-title">ลูกบ้านพูดถึงเรา</h2>
+    <p class="section-sub">ความเชื่อใจจากลูกค้าในชุมชน คือสิ่งที่เราภูมิใจที่สุด</p>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"ซื้อผักที่นี่ทุกวัน สดมาก ไม่มียาฆ่าแมลง ลูกกินได้สบายใจ ราคาก็ถูกกว่าตลาดอีก"</div>
+        <div class="reviewer">
+          <div class="reviewer-avatar ra1">👩</div>
+          <div><div class="reviewer-name">คุณนิด</div><div class="reviewer-sub">ลูกบ้านในหมู่บ้าน</div></div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-d1">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"ร้านค้าซอย 18Aใกล้บ้าน สินค้าครบ ราคาถูก ส่งถึงบ้านด้วย สะดวกมาก ไม่ต้องขับรถออกไปไกล"</div>
+        <div class="reviewer">
+          <div class="reviewer-avatar ra2">👨</div>
+          <div><div class="reviewer-name">คุณสมชาย</div><div class="reviewer-sub">ลูกบ้านในหมู่บ้าน</div></div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-d2">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"ชอบที่มีสอนวิธีปลูกผักด้วย ลองปลูกตามแล้วได้ผลดีมาก ขอบคุณมากเลยค่ะ"</div>
+        <div class="reviewer">
+          <div class="reviewer-avatar ra3">👩</div>
+          <div><div class="reviewer-name">คุณปุ้ย</div><div class="reviewer-sub">ลูกบ้านในหมู่บ้าน</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">ติดต่อเรา</div>
+    <h2 class="section-title reveal reveal-d1">พร้อมบริการทุกวัน</h2>
+    <p class="section-sub reveal reveal-d2">ติดต่อสั่งซื้อสินค้า หรือสอบถามข้อมูลเพิ่มเติมได้เลย</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>ข้อมูลร้านค้า</h3>
+        <ul class="contact-items">
+          <li>
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">
+              <div class="c-title">ที่อยู่ร้าน</div>
+              <div class="c-val">https://maps.app.goo.gl/bzfEFdMYA8ME1skW8</div>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon">⏰</div>
+            <div class="contact-text">
+              <div class="c-title">เวลาทำการ</div>
+              <div class="c-val">เปิดทุกวัน 05:00 – 19:00 น.</div>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon">📱</div>
+            <div class="contact-text">
+              <div class="c-title">โทรศัพท์</div>
+              <div class="c-val">02-924-0301 หรือ 061-785-6138</div>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon">💳</div>
+            <div class="contact-text">
+              <div class="c-title">การชำระเงิน</div>
+              <div class="c-val">เงินสด / พร้อมเพย์ / QR Code</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="cta-box">
+          <h3>🛒 สั่งซื้อจากร้านค้าซอย 18A เลย!</h3>
+          <p>ส่งถึงบ้านในหมู่บ้านฟรี! หรือจะแวะมารับที่ร้านก็ได้<br>สั่งผักล่วงหน้า รับสดทุกเช้า</p>
+          <div class="cta-links">
+            <a class="cta-link" href="https://lin.ee/xj7q0Ih">
+              <span class="cta-link-icon">💬</span>
+              <span>ติดต่อทาง LINE Official</span>
+            </a>
+            <a class="cta-link" href="#">
+              <span class="cta-link-icon">📞</span>
+              <span>โทรสั่งซื้อสินค้า <br> 02-924-0301 หรือ 061-785-6138</span>
+            </a>
+            <a class="cta-link" href="#">
+              <span class="cta-link-icon">📦</span>
+              <span>ภายในหมู่บ้านจัดส่งฟรี</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <p><strong>ร้านค้าซอย 18A</strong> — สินค้าครบ ราคาถูก ผักสดปลูกเอง เปิดทุกวัน 05:00–19:00 น.</p>
+  <p style="margin-top:8px;font-size:.75rem;">© 2567 ร้านค้าซอย 18A · ออกแบบด้วยความรักต่อชุมชน 💚</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
