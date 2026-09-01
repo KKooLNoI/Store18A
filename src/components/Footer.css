@@ -1,0 +1,17 @@
+.footer{background:var(--ink);color:rgba(255,251,241,.7);padding:3.4rem 0 2rem}
+.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.6rem;margin-bottom:1.8rem}
+.footer-brand{display:flex;align-items:center;gap:12px}
+.footer-brand-icon{
+  width:44px;height:44px;border-radius:var(--r-sm);background:var(--red500);
+  border:2px solid #fdf8ec;display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.footer-brand-name{font-family:'Prompt',sans-serif;font-weight:900;font-size:1.05rem;color:#fdf8ec}
+.footer-brand-sub{font-size:.8rem;color:rgba(255,251,241,.55)}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap}
+.footer-links a{font-size:.88rem;font-weight:600;color:rgba(255,251,241,.75)}
+.footer-links a:hover{color:var(--gold400)}
+
+.footer-divider{height:1.5px;background:rgba(255,251,241,.14);margin-bottom:1.6rem}
+
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.8rem}
+.footer-contact{display:flex;gap:18px;flex-wrap:wrap;color:rgba(255,251,241,.6)}

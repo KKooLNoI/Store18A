@@ -1,0 +1,13 @@
+.marquee-wrap{
+  overflow:hidden;background:var(--g800);
+  border-top:var(--border-w) solid var(--ink);border-bottom:var(--border-w) solid var(--ink);
+  padding:14px 0;
+}
+.marquee-track{display:inline-flex;white-space:nowrap;animation:marquee 26s linear infinite}
+.marquee-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  color:#f2fbf4;font-family:'Prompt',sans-serif;font-weight:700;font-size:.9rem;
+  padding:0 22px;position:relative;
+}
+.marquee-chip::after{content:'✦';margin-left:22px;color:var(--gold400);position:absolute;right:-3px}
+.mq-emoji{font-size:1.1rem}

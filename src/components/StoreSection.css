@@ -1,0 +1,49 @@
+.store-section{background:var(--cream2)}
+.store-hd{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;
+  flex-wrap:wrap;margin-bottom:2.4rem;
+}
+.store-cta-btn{flex-shrink:0}
+
+.cat-bar{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2.2rem;
+}
+.cat-btn{
+  font-family:'Prompt',sans-serif;font-weight:700;font-size:.86rem;
+  background:var(--paper);border:2px solid var(--ink);color:var(--ink-soft);
+  padding:9px 18px;border-radius:var(--r-pill);
+  display:flex;align-items:center;gap:6px;
+  transition:transform var(--t-fast), background var(--t), color var(--t);
+}
+.cat-btn:hover{transform:translateY(-2px)}
+.cat-btn.active{background:var(--g700);color:#fff;box-shadow:var(--pop-xs)}
+.cat-count{
+  background:rgba(255,255,255,.25);border-radius:var(--r-pill);
+  font-size:.72rem;padding:1px 8px;
+}
+
+.prod-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.3rem;
+}
+.prod-card{
+  position:relative;background:var(--paper);border:var(--border-w) solid var(--ink);
+  border-radius:var(--r-md);box-shadow:var(--pop-sm);overflow:hidden;
+  transition:transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+.prod-card:hover{transform:translate(-2px,-4px);box-shadow:7px 8px 0 var(--ink)}
+.prod-tag{
+  position:absolute;top:9px;right:9px;z-index:2;
+  font-size:.65rem;font-weight:800;padding:4px 9px;border-radius:var(--r-pill);
+  border:1.5px solid var(--ink);transform:rotate(3deg);
+}
+.prod-tag.tag-hot{background:var(--red500);color:#fff}
+.prod-tag.tag-sale{background:var(--gold400);color:var(--ink)}
+.prod-thumb{
+  height:120px;display:flex;align-items:center;justify-content:center;
+  border-bottom:var(--border-w) solid var(--ink);
+}
+.prod-img{width:100%;height:100%;object-fit:cover}
+.prod-emoji{font-size:2.5rem}
+.prod-body{padding:12px 14px 14px}
+.prod-name{font-family:'Prompt',sans-serif;font-weight:700;font-size:.86rem;color:var(--ink);line-height:1.3;margin-bottom:2px}
+.prod-unit{font-size:.76rem;color:var(--txt3)}

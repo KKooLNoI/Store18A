@@ -1,0 +1,203 @@
+/* ═══════════════════════════════
+   DESIGN TOKENS — "ตลาดสด 18A"
+   ตลาดสด/ป้ายกระดาษ + sticker pop style
+═══════════════════════════════ */
+:root {
+  /* Paper / canvas */
+  --cream:   #fbf3e2;
+  --cream2:  #f4e8cd;
+  --paper:   #fffbf1;
+  --canvas:  var(--cream);
+  --card:    var(--paper);
+
+  /* Ink (text + outlines) */
+  --ink:      #16301f;
+  --ink-soft: #375542;
+  --ink-dim:  #6b8474;
+
+  /* Green (brand) */
+  --g900:#0e2e1c; --g800:#144526; --g700:#1a5c31; --g600:#20823f;
+  --g500:#2ba24d; --g400:#4cbf68; --g300:#8adba0; --g200:#c3edcd; --g100:#e6f7e9;
+
+  /* Tomato / red accent */
+  --red700:#8f2a15; --red600:#c1381c; --red500:#e04a25; --red400:#f16a3f; --red100:#fce3d7;
+
+  /* Gold / sticker accent */
+  --gold700:#8a5b06; --gold600:#c1860c; --gold500:#e8a317; --gold400:#f4c14a; --gold100:#fdefd0;
+
+  /* Sky (misc / drinks) */
+  --sky500:#2f8fbd; --sky400:#5eb0d6; --sky100:#dff1fa;
+
+  /* Typography colors */
+  --txt0: var(--ink);
+  --txt1: var(--ink-soft);
+  --txt2: #4a6a56;
+  --txt3: var(--ink-dim);
+
+  /* "Pop" hard shadows — sticker / cut-paper look */
+  --pop-xs: 2px 2px 0 var(--ink);
+  --pop-sm: 3px 3px 0 var(--ink);
+  --pop-md: 5px 5px 0 var(--ink);
+  --pop-lg: 8px 8px 0 var(--ink);
+  --pop-red: 5px 5px 0 var(--red700);
+  --pop-green: 5px 5px 0 var(--g800);
+
+  /* Soft shadows */
+  --shadow-xs: 0 1px 3px rgba(20,40,20,.08);
+  --shadow-sm: 0 4px 14px rgba(20,40,20,.10);
+  --shadow-md: 0 10px 30px rgba(20,40,20,.14);
+  --shadow-lg: 0 22px 54px rgba(20,40,20,.18);
+
+  /* Radius */
+  --r-xs:8px; --r-sm:14px; --r-md:20px; --r-lg:28px; --r-xl:38px; --r-pill:999px;
+
+  /* Motion */
+  --ease: cubic-bezier(.22,1,.36,1);
+  --ease-pop: cubic-bezier(.34,1.56,.64,1);
+  --t-fast:.16s; --t:.26s; --t-slow:.45s;
+
+  --border-w: 2.5px;
+}
+
+/* ═══════════════════════════════
+   RESET
+═══════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sarabun',sans-serif;
+  background:var(--canvas);color:var(--txt0);
+  overflow-x:hidden;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(22,48,31,.06) 1px, transparent 0);
+  background-size:22px 22px;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--g500);border-radius:99px}
+
+/* ═══════════════════════════════
+   KEYFRAMES
+═══════════════════════════════ */
+@keyframes fadeDown  {from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+@keyframes fadeUp    {from{opacity:0;transform:translateY(26px) }to{opacity:1;transform:none}}
+@keyframes fadeIn    {from{opacity:0}to{opacity:1}}
+@keyframes scaleIn   {from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse     {0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@keyframes pulseSoft {0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes float     {0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-10px) rotate(var(--rot,0deg))}}
+@keyframes floatR    {0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@keyframes wiggle    {0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes spin      {to{transform:rotate(360deg)}}
+@keyframes shimmer   {0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes marquee   {from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes marqueeR  {from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes popIn     {0%{opacity:0;transform:scale(.7) rotate(-6deg)}70%{transform:scale(1.05) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes ringPulse {0%{box-shadow:0 0 0 0 rgba(224,74,37,.45)}70%{box-shadow:0 0 0 14px rgba(224,74,37,0)}100%{box-shadow:0 0 0 0 rgba(224,74,37,0)}}
+
+/* ═══════════════════════════════
+   REVEAL SYSTEM
+═══════════════════════════════ */
+.reveal{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+}
+.reveal.from-left {transform:translateX(-32px)}
+.reveal.from-right{transform:translateX(32px)}
+.reveal.scale    {transform:scale(.94)}
+.reveal.visible  {opacity:1;transform:none}
+.d1{transition-delay:.08s}
+.d2{transition-delay:.16s}
+.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}
+
+/* ═══════════════════════════════
+   LAYOUT UTILS
+═══════════════════════════════ */
+.wrap{max-width:1240px;margin:0 auto;padding:0 5vw}
+section{padding:100px 0}
+
+/* ═══════════════════════════════
+   SECTION LABELS
+═══════════════════════════════ */
+.label-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold100);border:var(--border-w) solid var(--ink);
+  color:var(--ink);font-size:.72rem;font-weight:800;font-family:'Prompt',sans-serif;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 14px;border-radius:var(--r-pill);margin-bottom:1.2rem;
+  transform:rotate(-1.5deg);box-shadow:var(--pop-xs);
+}
+.label-chip.light{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.5);color:#fff}
+.label-chip .chip-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--red500);
+  animation:pulse 2s ease infinite;
+}
+.label-chip .chip-dot.lime{background:var(--gold400)}
+
+.section-eyebrow{
+  font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--g700);margin-bottom:1rem;font-family:'Prompt',sans-serif;
+  display:flex;align-items:center;gap:10px;
+}
+.section-eyebrow::before{
+  content:'';flex-shrink:0;
+  width:32px;height:3px;border-radius:2px;
+  background:var(--red500);
+}
+.section-heading{
+  font-family:'Prompt',sans-serif;font-weight:900;
+  font-size:clamp(1.9rem,3.9vw,2.9rem);
+  color:var(--txt0);line-height:1.16;margin-bottom:.7rem;
+}
+.section-heading mark{
+  background:none;color:var(--red600);position:relative;font-style:normal;
+}
+.section-lead{color:var(--txt2);font-size:1.05rem;line-height:1.8;max-width:520px}
+
+/* ═══════════════════════════════
+   BUTTONS — pop / sticker style
+═══════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:'Prompt',sans-serif;font-weight:800;font-size:.92rem;
+  border-radius:var(--r-pill);padding:14px 30px;
+  transition:transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease);
+  cursor:pointer;border:var(--border-w) solid var(--ink);
+}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn:active{transform:translate(1px,1px);box-shadow:none !important}
+.btn-solid{
+  background:var(--red500);color:#fff5eb;box-shadow:var(--pop-md);
+}
+.btn-solid:hover{box-shadow:7px 7px 0 var(--ink)}
+.btn-ghost{
+  background:var(--paper);color:var(--ink);box-shadow:var(--pop-sm);
+}
+.btn-ghost:hover{background:var(--gold100);box-shadow:6px 6px 0 var(--ink)}
+.btn-white{
+  background:#fff;color:var(--g700);border-color:#fff;
+  box-shadow:0 4px 20px rgba(0,0,0,.18);
+}
+.btn-white:hover{box-shadow:0 8px 32px rgba(0,0,0,.24)}
+
+/* generic reusable card w/ hard outline + offset shadow */
+.card-pop{
+  background:var(--paper);
+  border:var(--border-w) solid var(--ink);
+  border-radius:var(--r-md);
+  box-shadow:var(--pop-md);
+}
+
+/* rotated sticker badge, reusable */
+.sticker{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Prompt',sans-serif;font-weight:800;font-size:.72rem;
+  padding:5px 12px;border-radius:var(--r-pill);
+  border:2px solid var(--ink);box-shadow:var(--pop-xs);
+  transform:rotate(-4deg);white-space:nowrap;
+}

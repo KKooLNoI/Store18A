@@ -1,0 +1,50 @@
+.flash-section{position:relative;overflow:hidden}
+.flash-bg-blob{
+  position:absolute;top:-120px;right:-120px;width:340px;height:340px;border-radius:50%;
+  background:var(--gold100);z-index:0;
+}
+.flash-hd{position:relative;z-index:1;margin-bottom:2.6rem}
+.flash-eyebrow{
+  display:inline-block;font-family:'Prompt',sans-serif;font-weight:800;font-size:.78rem;
+  color:var(--red600);letter-spacing:.08em;margin-bottom:.6rem;
+}
+.flash-title{
+  font-family:'Prompt',sans-serif;font-weight:900;font-size:clamp(1.7rem,3.4vw,2.4rem);
+  color:var(--ink);line-height:1.2;
+}
+.flash-title span{color:var(--red500)}
+
+.deal-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;
+}
+.deal-card{
+  position:relative;background:var(--paper);border:var(--border-w) solid var(--ink);
+  border-radius:var(--r-md);box-shadow:var(--pop-md);overflow:hidden;
+  transition:transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+.deal-card:hover{transform:translate(-3px,-4px);box-shadow:8px 9px 0 var(--ink)}
+.deal-hot{
+  position:absolute;top:10px;left:10px;z-index:2;
+  background:var(--red500);color:#fff5eb;font-size:.68rem;font-weight:800;
+  padding:4px 10px;border-radius:var(--r-pill);border:1.5px solid var(--ink);
+  transform:rotate(-3deg);
+}
+.deal-thumb{
+  height:150px;display:flex;align-items:center;justify-content:center;
+  border-bottom:var(--border-w) solid var(--ink);
+}
+.deal-img{width:100%;height:100%;object-fit:cover}
+.deal-emoji{font-size:3rem}
+.deal-body{padding:14px 16px 18px}
+.deal-name{font-family:'Prompt',sans-serif;font-weight:800;font-size:.94rem;color:var(--ink);margin-bottom:2px}
+.deal-unit{font-size:.8rem;color:var(--txt3);margin-bottom:12px}
+.deal-btn{
+  display:inline-block;font-family:'Prompt',sans-serif;font-weight:800;font-size:.82rem;
+  background:var(--g100);color:var(--g800);padding:8px 14px;border-radius:var(--r-pill);
+  border:1.5px solid var(--g600);
+}
+.deal-btn:hover{background:var(--g600);color:#fff}
+
+@media(max-width:900px){.deal-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.deal-grid{grid-template-columns:1fr}}

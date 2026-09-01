@@ -1,0 +1,45 @@
+.reviews-section{position:relative;background:var(--ink);overflow:hidden}
+.reviews-blob{position:absolute;border-radius:50%;opacity:.5;z-index:0}
+.r1{width:300px;height:300px;background:radial-gradient(circle,rgba(76,191,104,.25),transparent 70%);top:-100px;left:-80px}
+.r2{width:260px;height:260px;background:radial-gradient(circle,rgba(244,193,74,.2),transparent 70%);bottom:-90px;right:-60px}
+
+.reviews-hd{position:relative;z-index:1;margin-bottom:2.6rem}
+
+.stars-row{display:flex;gap:2px;margin-bottom:.7rem}
+.star{color:var(--gold400);font-size:1rem}
+
+.reviews-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-bottom:2.6rem;
+}
+.review-card{
+  background:var(--paper);border:var(--border-w) solid var(--ink);border-radius:var(--r-md);
+  padding:1.6rem 1.5rem;position:relative;box-shadow:var(--pop-md);
+}
+.review-quote{
+  position:absolute;top:-14px;left:18px;font-size:2.2rem;color:var(--gold400);
+  font-family:Georgia,serif;line-height:1;
+}
+.review-text{color:var(--ink-soft);font-size:.92rem;line-height:1.8;margin-bottom:1.2rem}
+.reviewer{display:flex;align-items:center;gap:10px}
+.reviewer-avi{
+  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;border:2px solid var(--ink);flex-shrink:0;
+}
+.reviewer-name{font-family:'Prompt',sans-serif;font-weight:800;font-size:.88rem;color:var(--ink)}
+.reviewer-role{font-size:.72rem;color:var(--txt3)}
+.verified-badge{
+  margin-left:auto;font-size:.66rem;font-weight:800;color:var(--g700);
+  background:var(--g100);border:1.5px solid var(--g600);padding:3px 8px;border-radius:var(--r-pill);
+}
+
+.reviews-summary{
+  position:relative;z-index:1;
+  display:flex;justify-content:center;gap:3.2rem;flex-wrap:wrap;
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);
+  border-radius:var(--r-lg);padding:1.6rem;
+}
+.rs-num{font-family:'Prompt',sans-serif;font-weight:900;font-size:1.8rem;color:var(--gold400);text-align:center}
+.rs-label{font-size:.8rem;color:rgba(255,251,241,.65);text-align:center}
+
+@media(max-width:900px){.reviews-grid{grid-template-columns:1fr}}
